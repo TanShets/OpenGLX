@@ -1,0 +1,2 @@
+It consists of a shader source code file and shader class which handles the compilation of the source file.
+It also handles the uniforms which might be sent to the shader.
