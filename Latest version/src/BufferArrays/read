@@ -1,0 +1,2 @@
+It forms all of the necessary buffers into the GPU
+It also abstracts it into classes
