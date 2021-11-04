@@ -1,5 +1,5 @@
-#include <VertexArray.h>
-#include <IndexBuffer.h>
+#pragma once
+#include <..\shapes\shapes.h>
 #include <..\shaders\Shaders.h>
 
 class Renderer

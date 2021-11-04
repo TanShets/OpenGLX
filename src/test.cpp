@@ -1,5 +1,5 @@
 #include "Renderer.h"
-//#include "Texture.h"
+#include "Texture.h"
 #include <GLFW/glfw3.h>
 
 int main() {
@@ -63,11 +63,12 @@ int main() {
 	//glVertexAttribPointer(0, element.count, element.type, element.normalized, vbLayout.getStride(), (const void*)offset);
 	//texture.Bind(1);
 	shader.BindShader();
-	//Texture texture("Picture1.png");
-	//texture.Bind();
+	Texture texture("Picture1.png");
+	texture.Bind();
 	//GLint u_texture = 0;
 	//glBindBuffer(GL_ARRAY_BUFFER, 0);
 	GLfloat colors[4];
+	GLfloat xx = 0;
 	while (!glfwWindowShouldClose(window)) {
 		glfwSwapInterval(5);
 		//glClear(GL_COLOR_BUFFER_BIT);
@@ -79,6 +80,7 @@ int main() {
 		colors[2] = (GLfloat)((float)(rand() % 10) / 10);
 		colors[3] = 1.0f;
 		//shader.uniformChange('i', 1, &u_texture, "u_Texture");
+		//shader.uniformChange('f', 1, &xx, "diss");
 		shader.uniformChange('f', 4, colors, "u_Color");
 		renderer.Draw(&vertexArray, &indexBuffer, shader);
 		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);

@@ -71,11 +71,17 @@ void Shaders::deleteShader() const {
 }
 
 Shaders::~Shaders() {
+	glUseProgram(0);
 	this->deleteShader();
 }
 
 void Shaders::BindShader() const {
 	glUseProgram(this->Shader_id);
+}
+
+void Shaders::UnBindShader() const
+{
+	glUseProgram(0);
 }
 
 int Shaders::getLocation(const std::string& uniform_name)
@@ -160,6 +166,21 @@ void Shaders::uniformChange(char type, int size, void* values, const std::string
 				}
 				default:
 					return;
+			}
+			break;
+		}
+		case 'M':
+		{
+			switch (size) { // No 1 x 1 matrix
+			case 4:
+			{
+				glm::mat4* val4 = (glm::mat4*)values;
+				//glUniform4f(loc, *(vals), *(vals + 1), *(vals + 2), *(vals + 3));
+				glUniformMatrix4fv(loc, 1, GL_FALSE, &(*val4)[0][0]);
+				break;
+			}
+			default:
+				return;
 			}
 			break;
 		}

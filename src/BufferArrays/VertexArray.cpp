@@ -27,18 +27,14 @@ void VertexArray::AddBuffer(const VertexBuffer& vertexBuffer, const VertexBuffer
 	//vertexBuffer.Bind();
 	const auto& elements = layouts.getElements();
 	unsigned int offset = 0;
+	const Vertex* data = (const Vertex*)vertexBuffer.getData();
 	//std::cout << "size " << elements.size() << std::endl;
 	for (unsigned int i = 0; i < elements.size(); i++)
 	{
 		const auto& element = elements[i];
 		glEnableVertexAttribArray(i);
-		
-		std::cout << i << std::endl;
-		//std::cout << element.count << std::endl;
-		//std::cout << element.type << std::endl;
-		//std::cout << layouts.getStride() << std::endl;
-		//std::cout << offset << std::endl;
 		glVertexAttribPointer(i, element.count, element.type, element.normalized, layouts.getStride(), (const void*)offset);
 		offset += element.count * VertexBufferElement::getSize(element.type);
+		//offset = offsetof(Vertex, position);
 	}
 }

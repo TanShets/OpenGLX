@@ -19,7 +19,7 @@ textureID(0), local_Buffer(nullptr), width(0), height(0), Bpp(0)
 		std::cout << "Height " << this->height << std::endl;
 		while (*(this->local_Buffer + i) != NULL)
 		{
-			std::cout << *(this->local_Buffer + i) << std::endl;
+			std::cout << *(this->local_Buffer + i) << " " << i << std::endl;
 			i++;
 		}
 	}
@@ -43,17 +43,23 @@ Texture::~Texture()
 
 void Texture::Bind() const
 {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glActiveTexture(GL_TEXTURE0);
+	std::cout << "Texture Bind for slot 0 Activated" << std::endl;
 	glBindTexture(GL_TEXTURE_2D, this->textureID);
 }
 
 void Texture::Bind(unsigned int slot) const
 {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glActiveTexture(GL_TEXTURE0 + slot);
 	glBindTexture(GL_TEXTURE_2D, this->textureID);
 }
 
 void Texture::UnBind() const
 {
+	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

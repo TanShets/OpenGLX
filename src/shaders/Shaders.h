@@ -1,9 +1,12 @@
+#pragma once
 #include <GL/glew.h>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
 #include <iostream>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
 //#define ASSERT(x) if(!(x)) __debugbreak();
 //#define GLCall(x) ASSERT(logCall(#x, __FILE__, __LINE__))
 typedef struct names {
@@ -26,6 +29,7 @@ class Shaders
 		static unsigned int compileShader(unsigned int type, const std::string& source_code);
 		void deleteShader() const;
 		void BindShader() const;
+		void UnBindShader() const;
 		int getLocation(const std::string& uniform_name);
 		void uniformChange(char type, int size, void* values, const std::string& uniform_name);
 };
